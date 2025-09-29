@@ -1,0 +1,41 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Entities
+@model Faturalar
+@{
+    ViewBag.Title = "CreateFatura";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<div style="margin:10px 20px">
+    <h2>Yeni Fatura Sayfası</h2>
+    <br />
+    <form class="form-group" method="post">
+        <label for="faturaserino">Fatura Seri No</label>
+        @Html.TextBoxFor(m => m.FaturaSeriNo, new { @class = "form-control" })
+        <br />
+        <label for="faturasirano">Fatura Sıra No</label>
+        @Html.TextBoxFor(m => m.FaturaSıraNo, new { @class = "form-control" })
+        <br />
+        <label for="tarih">Tarih</label>
+        @Html.TextBoxFor(m => m.Tarih, new { @class = "form-control" })
+        <br />
+        <label for="saat">Saat</label>
+        @Html.TextBoxFor(m => m.Saat, new { @class = "form-control" })
+        <br />
+        <label for="vergidairesi">Vergi Dairesi</label>
+        @Html.TextBoxFor(m => m.VergiDairesi, new { @class = "form-control" })
+        <br />
+        <label for="toplam">Toplam</label>
+        @Html.TextBoxFor(m => m.Toplam, new { @class = "form-control" })
+        <br />
+        <label for="teslimeden">Teslim Eden</label>
+        @Html.TextBoxFor(m => m.TeslimEden, new { @class = "form-control" })
+        <br />
+        <label for="teslimalan">Teslim Alan</label>
+        @Html.TextBoxFor(m => m.TeslimAlan, new { @class = "form-control" })
+        <br />
+
+
+        <button class="btn btn-info">Kaydet</button>
+    </form>
+</div>

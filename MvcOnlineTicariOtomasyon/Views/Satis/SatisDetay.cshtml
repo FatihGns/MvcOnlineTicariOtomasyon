@@ -1,0 +1,48 @@
+@using MvcOnlineTicariOtomasyon.Models.Entities
+@model List<SatisHareket>
+@{
+    ViewBag.Title = "SatisDetay";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<div style="margin:10px 20px">
+    <h2>Satýþ Detayý</h2>
+  
+    <br />
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Satýþ ID</th>
+                <th scope="col">Ürün</th>
+                <th scope="col">Cari</th>
+                <th scope="col">Personel</th>
+                <th scope="col">Adet</th>
+                <th scope="col">Fiyat</th>
+                <th scope="col">Toplam</th>
+                <th scope="col">Tarih</th>
+                <th scope="col">Yazdýr</th>
+         
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td scope="row">@item.SatisID</td>
+                    <td>@item.Products.ProductName</td>
+                    <td>@item.Carilers.CariName @item.Carilers.CariSurname </td>
+                    <td>@item.Employees.EmployeeName @item.Employees.EmployeeSurname </td>
+                    <td>@item.Adet</td>
+                    <td>@item.Fiyat</td>
+                    <td>@item.ToplamTutar</td>
+                    <td>@item.Tarih.AddMonths(1).ToShortDateString()</td>
+                    <td><a href="/Satis/SatisPdf/@item.SatisID" class="btn btn-default" style="background-color:dodgerblue;color:#fff">YAZDIR</a></td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+  
+</div>

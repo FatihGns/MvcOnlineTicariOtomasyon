@@ -1,0 +1,51 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Entities
+@model List<Employee>
+@{
+    ViewBag.Title = "DepartmanDetail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+@if (TempData["SuccessMessage"] != null || TempData["ToastMessage"] != null)
+{
+    <div class="alert alert-success" role="alert" id="tempMessage">
+        @TempData["SuccessMessage"]
+        @TempData["ToastMessage"]
+    </div>
+}
+
+<br />
+<div style="margin:10px 20px">
+    <h2>Personel Detay</h2>
+    <br />
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Departman Adı: @ViewBag.departman</li>
+    </ol>
+    <br />
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Personel</th>
+                <th scope="col">Departman</th>
+                <th scope="col">Satışlar</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td scope="row">@count</td>
+                    <td>@item.EmployeeName @item.EmployeeSurname</td>
+                    <td>@item.Department.DepartmentName</td>
+                    <td><a class="btn btn-danger" href="/Departman/DepartmanPersonelSatis/@item.EmployeeID">Satışlar</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-info" href="/Departman/Index">Geri Dön</a>
+</div>
+
+

@@ -1,0 +1,42 @@
+@using MvcOnlineTicariOtomasyon.Models.Entities;
+@model  SatisHareket
+
+@{
+    ViewBag.Title = "SatisGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<div style="margin:10px 20px">
+    <h2>Satýþ Ýþlemi Güncelleme Sayfasý</h2>
+    @using (Html.BeginForm("SatisGuncelle", "Satis", FormMethod.Post))
+    {
+        <label for="product">Ürün</label>
+        @Html.DropDownListFor(m => m.ProductID, (List<SelectListItem>)ViewBag.dgr1, " Ürün Seçiniz ", new { @class = "form-control" })
+        <br />
+        <label for="cari">Cari</label>
+        @Html.DropDownListFor(m => m.CariID, (List<SelectListItem>)ViewBag.dgr2, " Cari Seçiniz ", new { @class = "form-control" })
+        <br />
+        <label for="Employee">Personel</label>
+        @Html.DropDownListFor(m => m.EmployeeID, (List<SelectListItem>)ViewBag.dgr3, " Personel Seçiniz ", new { @class = "form-control" })
+        <br />
+        <form class="form-group" method="post">
+            <input type="hidden" name="SatisID" value="@Model.SatisID" />
+            <label for="count">Adet</label>
+            @Html.TextBoxFor(m => m.Adet, new { @class = "form-control" })
+            <br />
+            <label for="price">Fiyat</label>
+            @Html.TextBoxFor(m => m.Fiyat, new { @class = "form-control" })
+            <br />
+            <label for="totalPrice">Toplam Tutar</label>
+            @Html.TextBoxFor(m => m.ToplamTutar, new { @class = "form-control" })
+            <br />
+            <label for="date">Tarih</label>
+            @Html.TextBoxFor(m => m.Tarih, new { @class = "form-control" })
+            <br />
+            <button class="btn btn-info">Güncelle</button>
+        </form>
+    }
+
+
+</div>

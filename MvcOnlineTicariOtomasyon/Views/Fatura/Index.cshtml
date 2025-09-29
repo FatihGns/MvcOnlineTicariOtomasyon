@@ -1,0 +1,116 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Entities
+@model List<Faturalar>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+@if (TempData["SuccessMessage"] != null || TempData["ToastMessage"] != null)
+{
+    <div class="alert alert-success" role="alert" id="tempMessage">
+        @TempData["SuccessMessage"]
+        @TempData["ToastMessage"]
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert" id="tempMessage">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<div style="margin:10px 20px ">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Seri Sıra No</th>
+                <th scope="col">Tarih</th>
+                <th scope="col">Saat</th>
+                <th scope="col">Toplam</th>
+                <th scope="col">Güncelle</th>
+                <th scope="col">Detaylar</th>
+                <th scope="col">Yeni Kalem</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="12" class="text-center">Hiç Fatura bulunamadı.</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    count++;
+        <tr>
+            <td scope="row">@count</td>
+            <td>@item.FaturaSeriNo @item.FaturaSıraNo</td>
+            <td>@item.Tarih.ToShortDateString()</td>
+            <td>@item.Saat</td>
+            <td>@item.Toplam.ToString("c")</td>
+
+            <td><a class="btn btn-warning" href="/Fatura/getFatura/@item.FaturaID">Güncelle</a></td>
+            <td><a class="btn btn-group" style="background-color:plum" href="/Fatura/FaturaDetail/@item.FaturaID">Detaylar</a></td>
+            <td><a class="btn btn-group" style="background-color:thistle" href="/Fatura/CreateFaturaKalem">Yeni Kalem</a></td>
+        </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <br />
+    <a class="btn btn-primary" href="/Fatura/CreateFatura">Fatura Ekle</a>
+    <br />
+    <br />
+
+    <button class="btn btn-warning style="background-color:#d95151;color:white" type="button" data-toggle="modal"data-target="#Modal1" >Popup Penceresi</button>
+
+    <div class="modal" id="Modal1" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Popup Diyalog Ekranı</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Fatura Seri Sıra No</td>
+                            <td>Tutar</td>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>@item.FaturaSeriNo @item.FaturaSıraNo</td>
+                                <td>@item.Toplam</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Tamam</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    setTimeout(function () {
+        var message = document.getElementById("tempMessage");
+        if (message) {
+            message.style.display = "none";
+        }
+    }, 5000); // 5 saniye
+
+    var statusButtons = document.getElementById("status");
+
+</script>
+

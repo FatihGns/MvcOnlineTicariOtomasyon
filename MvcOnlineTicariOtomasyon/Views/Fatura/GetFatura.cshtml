@@ -1,0 +1,46 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Entities
+@model Faturalar
+@{
+    ViewBag.Title = "GetFatura";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<div style="margin:10px 20px">
+    <h2>Ürün Güncelleme Sayfası</h2>
+    <br />
+    @using (Html.BeginForm("UpdateFatura", "Fatura", FormMethod.Post))
+    {
+        <form class="form-group" method="post">
+            <input type="hidden" name="FaturaID" value="@Model.FaturaID" />
+            <label for="faturasırano">Fatura Sıra No</label>
+            @Html.TextBoxFor(m => m.FaturaSıraNo, new { @class = "form-control" })
+            <br />
+            <label for="faturaserino">Fatura Seri No</label>
+            @Html.TextBoxFor(m => m.FaturaSeriNo, new { @class = "form-control" })
+            <br />
+            <label for="vergidairesi">Vergi Dairesi</label>
+            @Html.TextBoxFor(m => m.VergiDairesi, new { @class = "form-control" })
+            <br />
+            <label for="tarih">Tarih</label>
+            @Html.TextBoxFor(m => m.Tarih, new { @class = "form-control" })
+            <br />
+            <label for="saat">Saat</label>
+            @Html.TextBoxFor(m => m.Saat, new { @class = "form-control" })
+            <br />
+
+            <label for="teslimeden">Teslim Eden</label>
+            @Html.TextBoxFor(m => m.TeslimEden, new { @class = "form-control" })
+            <br />
+            <label for="teslimalan">Teslim Alan</label>
+            @Html.TextBoxFor(m => m.TeslimAlan, new { @class = "form-control" })
+            <br />
+            <label for="teslimalan">Toplam</label>
+            @Html.TextBoxFor(m => m.Toplam, new { @class = "form-control" })
+            <br />
+            <button class="btn btn-info">Kaydet</button>
+        </form>
+    }
+
+</div>
+

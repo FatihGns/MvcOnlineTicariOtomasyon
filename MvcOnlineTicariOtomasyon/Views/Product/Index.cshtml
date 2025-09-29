@@ -1,0 +1,94 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Entities
+@model  List<Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+@if (TempData["SuccessMessage"] != null || TempData["ToastMessage"] != null)
+{
+    <div class="alert alert-success" role="alert" id="tempMessage">
+        @TempData["SuccessMessage"]
+        @TempData["ToastMessage"]
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert" id="tempMessage">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<div style="margin:10px 20px ">
+
+    @using (Html.BeginForm("Index", "Product", FormMethod.Get))
+            {
+                <p>
+                    Ürün Adı: @Html.TextBox("p")
+                    <input type="submit" value="Ara"/>
+                </p>
+            }
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Resim</th>
+                <th scope="col">Ürün Adı</th>
+                <th scope="col">Marka</th>
+                <th scope="col">Stok</th>
+                <th scope="col">Alış Fiyatı</th>
+                <th scope="col">Satış Fiyatı</th>
+                <th scope="col">Durum</th>
+                <th scope="col">Kategori</th>
+                <th scope="col">Sil</th>
+                <th scope="col">Güncelle</th>
+                <th scope="col">Satış Yap</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="12" class="text-center"><h3>Hiç Ürün Bulunamadı</h3></td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    count++;
+                    <tr>
+                        <td scope="row">@count</td>
+                        <td><img src="@item.ProductImage" style="width:50px" /></td>
+                        <td>@item.ProductName</td>
+                        <td>@item.Brand</td>
+                        <td>@item.Stock</td>
+                        <td>@item.PurchasePrice.ToString("c")</td>
+                        <td>@item.SalePrice.ToString("c")</td>
+                        <td>@item.Status</td>
+                        <td>@item.Category.CategoryName</td>
+                        <td><a class="btn btn-danger" href="/Product/DeleteProduct/@item.ProductID">Sil</a></td>
+                        <td><a class="btn btn-success" href="/Product/UpdateProduct/@item.ProductID">Güncelle</a></td>
+                        <td><a class="btn btn-outline-primary" href="/Product/SatisYap/@item.ProductID">Satış Yap</a></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    
+    <br />
+    <a class="btn btn-primary" href="/Product/CreateProduct">Yeni Ürün Girişi</a>
+</div>
+
+<script>
+    setTimeout(function () {
+        var message = document.getElementById("tempMessage");
+        if (message) {
+            message.style.display = "none";
+        }
+    }, 5000); // 5 saniye
+</script>
+
+

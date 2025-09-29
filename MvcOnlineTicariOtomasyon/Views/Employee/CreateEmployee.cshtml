@@ -1,0 +1,33 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Entities
+@model Employee
+@{
+    ViewBag.Title = "CreateEmployee";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<div style="margin:10px 20px">
+    <h2>Yeni Personel Sayfası</h2>
+    <br />
+    @using (Html.BeginForm("CreateEmployee", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <label for="PersonelName">Personel Adı</label>
+        @Html.TextBoxFor(m => m.EmployeeName, new { @class = "form-control" })
+        <br />
+        <label for="PersonelSurname">Personel Soyadı</label>
+        @Html.TextBoxFor(m => m.EmployeeSurname, new { @class = "form-control" })
+        <br />
+        <label for="PersonelImage">Personel Görseli</label>
+        @*@Html.TextBoxFor(m => m.EmployeeImage, new { @class = "form-control" })*@
+        <input class="form-control" type="file" id="EmployeeImage" name="EmployeeImage">
+        <br />
+        <label for="DepartmentID">Departman</label>
+        @Html.DropDownListFor(m => m.DepartmentID, new SelectList(ViewBag.Departments, "DepartmentID", "DepartmentName"), "Departman Seçiniz", new { @class = "form-control" })
+        <br />
+        <button class="btn btn-info">Kaydet</button>
+    }
+
+
+</div>
+
+

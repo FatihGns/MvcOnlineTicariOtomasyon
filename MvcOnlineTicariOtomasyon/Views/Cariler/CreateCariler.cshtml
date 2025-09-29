@@ -1,0 +1,29 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Entities
+@model Cariler
+@{
+    ViewBag.Title = "CreateCariler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<div style="margin:10px 20px">
+    <h2>Yeni Cari Sayfası</h2>
+    <br />
+    <form class="form-group" method="post">
+        <label for="CariName">Cari Adı</label>
+        @Html.TextBoxFor(m => m.CariName, new { @class = "form-control" })
+        <br />
+        <label for="CariSurName">Cari Soyadı</label>
+        @Html.TextBoxFor(m => m.CariSurname, new { @class = "form-control" })
+        <br />
+        <label for="CariSehir">Şehir</label>
+        @Html.TextBoxFor(m => m.CariSehir, new { @class = "form-control" })
+        <br />
+        <label for="CariMail">Mail</label>
+        @Html.TextBoxFor(m => m.CariMail, new { @class = "form-control" })
+        <br />
+        <button class="btn btn-info">Kaydet</button>
+    </form>
+</div>
+
+

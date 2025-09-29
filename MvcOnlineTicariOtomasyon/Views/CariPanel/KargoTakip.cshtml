@@ -1,0 +1,68 @@
+﻿@model List<MvcOnlineTicariOtomasyon.Models.Entities.KargoDetay>
+@{
+    ViewBag.Title = "KargoTakip";
+    Layout = "~/Views/Shared/_CariLayout.cshtml";
+    int count = 0;
+}
+
+<div style="margin:10px 20px ">
+    @using (Html.BeginForm("KargoTakip", "CariPanel", FormMethod.Get))
+    {
+        <p>
+            Kargo Takip Numarası: @Html.TextBox("p")
+            <input type="submit" value="Ara" />
+        </p>
+    }
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Personel</th>
+                <th scope="col">Takip Kodu</th>
+                <th scope="col">Alıcı</th>
+                <th scope="col">Tarih</th>
+                <th scope="col">Detaylar</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="12" class="text-center">Hiç Kargo Detayı bulunamadı.</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    count++;
+                    <tr>
+                        <td scope="row">@count</td>
+                        <td>@item.Personel</td>
+                        <td>@item.TakipKodu</td>
+                        <td>@item.Alici</td>
+                        <td>@item.Tarih.ToShortDateString()</td>
+                        <td><a class="btn btn-group" style="background-color:plum" href="/CariPanel/CariKargoTakip/@item.TakipKodu">Detaylar</a></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <br />
+</div>
+
+<script>
+    setTimeout(function () {
+        var message = document.getElementById("tempMessage");
+        if (message) {
+            message.style.display = "none";
+        }
+    }, 5000); // 5 saniye
+
+    var statusButtons = document.getElementById("status");
+
+</script>
+
+

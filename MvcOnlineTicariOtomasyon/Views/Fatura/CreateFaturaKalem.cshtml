@@ -1,0 +1,31 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Entities
+@model FaturaKalem
+@{
+    ViewBag.Title = "CreateFaturaKalem";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div style="margin:10px 20px">
+    <h2>Yeni FaturaKalem Sayfası</h2>
+    <br />
+    <form class="form-group" method="post">
+        <label for="faturaId">FaturaID</label>
+        @Html.TextBoxFor(m => m.FaturaID, new { @class = "form-control" })
+        <br />
+        <label for="acıklama">Açıklama</label>
+        @Html.TextBoxFor(m => m.Aciklama, new { @class = "form-control" })
+        <br />
+        <label for="miktar">Miktar</label>
+        @Html.TextBoxFor(m => m.Miktar, new { @class = "form-control" })
+        <br />
+        <label for="birimfiyat">Birim Fiyat</label>
+        @Html.TextBoxFor(m => m.BirimFiyat, new { @class = "form-control" })
+        <br />
+        <label for="tutar">Tutar</label>
+        @Html.TextBoxFor(m => m.Tutar, new { @class = "form-control" })
+        <br />
+        <button class="btn btn-info">Kaydet</button>
+    </form>
+</div>
+
+

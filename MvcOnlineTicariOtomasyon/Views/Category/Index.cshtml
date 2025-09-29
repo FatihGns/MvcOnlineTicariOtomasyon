@@ -1,0 +1,73 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Entities
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<Category>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+@if (TempData["SuccessMessage"] != null || TempData["ToastMessage"] != null)
+{
+    <div class="alert alert-success" role="alert" id="tempMessage">
+        @TempData["SuccessMessage"]
+        @TempData["ToastMessage"]
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert" id="tempMessage">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<div style="margin:10px 20px ">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Kategori Adı</th>
+                <th scope="col">Sil</th>
+                <th scope="col">Güncelle</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="2" class="text-center">Hiç kategori bulunamadı.</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    count++;
+                    <tr>
+                        <td scope="row">@count</td>
+                        <td>@item.CategoryName</td>
+                        <td><a class="btn btn-danger" href="/Category/DeleteCategory/@item.CategoryID">Sil</a></td>
+                        <td><a class="btn btn-success" href="/Category/UpdateCategory/@item.CategoryID">Güncelle</a></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+   @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }),new PagedListRenderOptions
+{
+    LiElementClasses=new List<string>
+    {"page-link"}
+})
+    <br />
+    <a class="btn btn-primary" href="/Category/CreateCategory">Yeni Kategori Girişi</a>
+</div>
+
+<script>
+    setTimeout(function () {
+        var message = document.getElementById("tempMessage");
+        if (message) {
+            message.style.display = "none";
+        }
+    }, 5000); // 5 saniye
+</script>

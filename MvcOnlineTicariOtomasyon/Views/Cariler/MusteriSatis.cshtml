@@ -1,0 +1,48 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Entities
+@model List<SatisHareket>
+@{
+    ViewBag.Title = "MusteriSatis";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<div style="margin:10px 20px">
+    <h2>Personel Satış</h2>
+    <br />
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Cari Adı: @ViewBag.cari</li>
+    </ol>
+    <br />
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Satış ID</th>
+                <th scope="col">Ürün</th>
+                <th scope="col">Personel</th>
+                <th scope="col">Adet</th>
+                <th scope="col">Fiyat</th>
+                <th scope="col">Toplam</th>
+                <th scope="col">Tarih</th>
+                <th scope="col">Yazdır</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td scope="row">@item.SatisID</td>
+                    <td>@item.Products.ProductName</td>
+                    <td>@item.Employees.EmployeeName @item.Employees.EmployeeSurname</td>
+                    <td>@item.Adet</td>
+                    <td>@item.Fiyat</td>
+                    <td>@item.ToplamTutar</td>
+                    <td>@item.Tarih.AddMonths(1).ToShortDateString()</td>
+                    <td><a class="btn btn-info" href="#">Yazdır</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-info" href="/Cariler/Index">Geri Dön</a>
+</div>
+

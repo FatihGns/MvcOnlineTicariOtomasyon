@@ -1,0 +1,76 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Entities;
+@model List<SatisHareket>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<div style="margin:10px 20px ">
+    <table id="tbl1" class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Ürün</th>
+                <th scope="col">Cari</th>
+                <th scope="col">Personel</th>
+                <th scope="col">Adet</th>
+                <th scope="col">Fiyat</th>
+                <th scope="col">Toplam</th>
+                <th scope="col">Tarih</th>
+                <th scope="col">Güncelle</th>
+                <th scope="col">Detaylar</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="2" class="text-center">Hiç Satış bulunamadı.</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    count++;
+                    <tr>
+                        <td scope="row">@count</td>
+                        <td>@item.Products.ProductName</td>
+                        <td>@item.Carilers.CariName  @item.Carilers.CariSurname</td>
+                        <td>@item.Employees.EmployeeName @item.Employees.EmployeeSurname</td>
+                        <td>@item.Adet</td>
+                        <td>@item.Fiyat</td>
+                        <td>@item.ToplamTutar</td>
+                        <td>@item.Tarih.ToShortDateString()</td>
+                        <td><a class="btn btn-warning" href="/Satis/SatisGetir/@item.SatisID">Güncelle</a></td>
+                        <td><a class="btn btn-group" style="background-color:plum" href="/Satis/SatisDetay/@item.SatisID">Detaylar</a></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <br />
+    <a class="btn btn-primary" href="/Satis/CreateSatis">Yeni Satış Yap</a>
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#tbl1').DataTable({
+               
+            });
+        });
+    </script>
+
+</div>

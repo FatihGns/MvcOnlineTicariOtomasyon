@@ -1,0 +1,42 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Entities
+@model List<KargoTakip>
+@{
+    ViewBag.Title = "KargoTakip";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<br />
+<div style="margin:10px 20px">
+    <h2>Kargo Detay</h2>
+    <br />
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Kargo Takip Kodu</th>
+                <th scope="col">Açıklama</th>
+                <th scope="col">Tarih</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td scope="row">@count</td>
+                    <td>@item.TakipKodu</td>
+                    <td>@item.Aciklama</td>
+                    <td>@item.TarihZaman.ToShortDateString()</td>
+                    @*<td><a class="btn btn-danger" href="/Departman/DepartmanPersonelSatis/@item.KargoTakipID">Satışlar</a></td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-info" href="/Departman/Index">Geri Dön</a>
+</div>
+
+
+

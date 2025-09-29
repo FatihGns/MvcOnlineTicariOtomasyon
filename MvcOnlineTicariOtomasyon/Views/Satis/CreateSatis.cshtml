@@ -1,0 +1,32 @@
+@using MvcOnlineTicariOtomasyon.Models.Entities
+@model SatisHareket
+@{
+    ViewBag.Title = "CreateSatis";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<div style="margin:10px 20px">
+    <h2>Yeni Ürün Sayfasý</h2>
+    <br />
+    <form class="form-group" method="post">
+        <label for="product">Ürün</label>
+        @Html.DropDownListFor(m => m.ProductID, (List<SelectListItem>)ViewBag.dgr1," Ürün Seçiniz " , new { @class = "form-control" })
+        <br />
+        <label for="cari">Cari</label>
+        @Html.DropDownListFor(m => m.CariID, (List<SelectListItem>)ViewBag.dgr2, " Cari Seçiniz ", new { @class = "form-control" })
+        <br />
+        <label for="Employee">Personel</label>
+        @Html.DropDownListFor(m => m.EmployeeID, (List<SelectListItem>)ViewBag.dgr3, " Personel Seçiniz ", new { @class = "form-control" })
+        <br />
+        <label for="count">Adet</label>
+        @Html.TextBoxFor(m => m.Adet, new { @class = "form-control" })
+        <br />
+        <label for="price">Fiyat</label>
+        @Html.TextBoxFor(m => m.Fiyat, new { @class = "form-control" })
+        <br />
+        <label for="totalPrice">Toplam Tutar</label>
+        @Html.TextBoxFor(m => m.ToplamTutar, new { @class = "form-control" })
+        <br />
+        <button class="btn btn-info">Kaydet</button>
+    </form>
+</div>

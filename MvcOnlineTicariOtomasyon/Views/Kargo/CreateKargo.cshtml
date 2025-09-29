@@ -1,0 +1,31 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Entities
+@model KargoDetay
+@{
+    ViewBag.Title = "CreateKargo";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<div style="margin:10px 20px">
+    <h2>Yeni Kargo Sayfası</h2>
+    <br />
+    <form class="form-group" method="post">
+        <label for="takipkodu">Takip Kodu</label>
+        <input type="text" value="@ViewBag.TakipKod" readonly class="form-control" name="takipkodu"/>
+        <br />
+
+        <label for="Personel">Personel</label>
+        @Html.TextBoxFor(m => m.Personel, new { @class = "form-control" })
+        <br />
+        <label for="Alıcı">Alıcı</label>
+        @Html.TextBoxFor(m => m.Alici, new { @class = "form-control" })
+        <br />
+        <label for="Tarih">Tarih</label>
+        <input type="date" name="Tarih" class="form-control" />
+        <br />
+        <label for="Acıklama">Açıklama</label>
+        @Html.TextAreaFor(m => m.Aciklama, new { @class = "form-control" })
+        <br />
+        <button class="btn btn-info">Kaydet</button>
+    </form>
+</div>

@@ -1,0 +1,75 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Entities
+@model List<Cariler>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+@if (TempData["SuccessMessage"] != null || TempData["ToastMessage"] != null)
+{
+    <div class="alert alert-success" role="alert" id="tempMessage">
+        @TempData["SuccessMessage"]
+        @TempData["ToastMessage"]
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert" id="tempMessage">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<div style="margin:10px 20px ">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Cari Adı</th>
+                <th scope="col">Cari Soyadı</th>
+                <th scope="col">Şehir</th>
+                <th scope="col">Mail</th>
+                <th scope="col">Durum</th>
+                <th scope="col">Güncelle</th>
+                <th scope="col">Satış Geçmişi</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="2" class="text-center">Hiç kategori bulunamadı.</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    count++;
+                    <tr>
+                        <td scope="row">@count</td>
+                        <td>@item.CariName</td>
+                        <td>@item.CariSurname</td>
+                        <td>@item.CariSehir</td>
+                        <td>@item.CariMail</td>
+                        <td><a class="btn btn-danger" href="/Cariler/DeleteCariler/@item.CariID">Durum</a></td>
+                        <td><a class="btn btn-success" href="/Cariler/UpdateCariler/@item.CariID">Güncelle</a></td>
+                        <td><a class="btn btn-group" style="background-color:plum" href="/Cariler/MusteriSatis/@item.CariID">Satış Geçmişi</a></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <br />
+    <a class="btn btn-primary" href="/Cariler/CreateCariler">Yeni Cari Girişi</a>
+</div>
+
+<script>
+    setTimeout(function () {
+        var message = document.getElementById("tempMessage");
+        if (message) {
+            message.style.display = "none";
+        }
+    }, 5000); // 5 saniye
+</script>
