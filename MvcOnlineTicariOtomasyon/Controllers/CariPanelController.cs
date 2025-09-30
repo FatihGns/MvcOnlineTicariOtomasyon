@@ -145,7 +145,7 @@ namespace MvcOnlineTicariOtomasyon.Controllers
             return RedirectToAction("Index");
 
         }
-        public ActionResult CanliDestek()
+        public ActionResult Chat()
         {
             return View();
         }

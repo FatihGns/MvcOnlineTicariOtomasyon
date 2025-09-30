@@ -31,6 +31,82 @@
     <link rel="stylesheet" href="~/AdminLTE-3.0.4/plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        .chat-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            list-style: none;
+            padding: 10px;
+            overflow-y: auto;
+            margin: 0;
+        }
+
+            .chat-messages li {
+                margin-bottom: 10px;
+                display: flex;
+                flex-direction: column;
+                max-width: 70%;
+            }
+
+                .chat-messages li.other-message {
+                    align-self: flex-start;
+                    background: #e5e5ea;
+                    border-radius: 10px 10px 10px 0;
+                    padding: 5px 10px;
+                }
+
+                .chat-messages li.my-message {
+                    align-self: flex-end;
+                    background: #0b93f6;
+                    color: white;
+                    border-radius: 10px 10px 0 10px;
+                    padding: 5px 10px;
+                }
+
+                .chat-messages li .name {
+                    font-weight: bold;
+                    font-size: 0.85em;
+                    margin-bottom: 2px;
+                }
+
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+
+            .chat-input input[type="text"] {
+                flex: 1;
+                padding: 8px;
+                border-radius: 20px;
+                border: 1px solid #ccc;
+                outline: none;
+            }
+
+            .chat-input button {
+                margin-left: 10px;
+                padding: 8px 15px;
+                border: none;
+                border-radius: 20px;
+                background-color: #0b93f6;
+                color: white;
+                cursor: pointer;
+            }
+
+                .chat-input button:hover {
+                    background-color: #0077cc;
+                }
+    </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 
@@ -155,84 +231,17 @@
                             <button type="button" class="btn btn-info float-right"><i class="fas fa-plus"></i> Yeni Görev</button>
                         </div>
                     </div>
-                    <div class="card direct-chat direct-chat-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Canlı Destek</h3>
+                    <h2>Chat</h2>
+                    <div class="chat-container">
+                        <ul id="discussion" class="chat-messages"></ul>
 
-                            <div class="card-tools">
-                                <span data-toggle="tooltip" title="3 New Messages" class="badge badge-primary">3</span>
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Contacts"
-                                        data-widget="chat-pane-toggle">
-                                    <i class="fas fa-comments"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- /.card-header -->
-
-                        <div class="card-body">
-                            <!-- Sohbet Mesajları -->
-                            <div class="direct-chat-messages">
-                                <!-- Soldaki Mesaj -->
-                                <div class="direct-chat-msg">
-                                    <div class="direct-chat-infos clearfix">
-                                        <span class="direct-chat-name float-left">Cari</span>
-                                        <span class="direct-chat-timestamp float-right">29 Eylül 2025</span>
-                                    </div>
-                                    <div class="direct-chat-text">
-                                       Aldığım Telefonun iade hakkı kaç gün
-                                    </div>
-                                </div>
-
-                                <!-- Sağdaki Mesaj -->
-                                <div class="direct-chat-msg right">
-                                    <div class="direct-chat-infos clearfix">
-                                        <span class="direct-chat-name float-right">Admin</span>
-                                        <span class="direct-chat-timestamp float-left">29 Eylül 2025</span>
-                                    </div>
-                                    <div class="direct-chat-text">
-                                       14 Gün efendim
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/.direct-chat-messages-->
-                            <!-- Kişiler -->
-                            <div class="direct-chat-contacts">
-                                <ul class="contacts-list">
-                                    <li>
-                                        <a href="#">
-
-                                            <div class="contacts-list-info">
-                                                <span class="contacts-list-name">
-                                                    Count Dracula
-                                                    <small class="contacts-list-date float-right">2/28/2015</small>
-                                                </span>
-                                                <span class="contacts-list-msg">How have you been? I was...</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- /.direct-chat-contacts -->
-                        </div>
-                        <!-- /.card-body -->
-
-                        <div class="card-footer">
-                            <form action="#" method="post">
-                                <div class="input-group">
-                                    <input type="text" name="message" placeholder="Mesaj Yaz" class="form-control" />
-                                    <span class="input-group-append">
-                                        <button type="submit" class="btn btn-primary">Gönder</button>
-                                    </span>
-                                </div>
-                            </form>
+                        <div class="chat-input">
+                            <input type="text" id="message" placeholder="Mesajınızı yazın..." />
+                            <button id="sendmessage">Gönder</button>
+                            <input type="hidden" id="displayname" />
                         </div>
                     </div>
+
                 </div>
                 <div class="col-sm-6">
                     <div class="card">
@@ -322,14 +331,18 @@
                 </div>
 
             </div>
-    
+
             <!-- /.card -->
 
 
-</section>
+    </section>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+<script src="~/signalr/hubs"></script>
+<script src="~/Scripts/Chat.js"></script>
 <script>
      var ctx = document.getElementById("pieChart").getContext('2d');
        var myPieChart = new Chart(ctx, {

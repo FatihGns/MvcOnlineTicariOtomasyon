@@ -3232,7 +3232,7 @@
     <Content Include="Views\Error\PageError.cshtml" />
     <Content Include="Views\Category\Deneme.cshtml" />
     <Content Include="Views\Fatura\Dinamik.cshtml" />
-    <Content Include="Views\CariPanel\CanliDestek.cshtml" />
+    <Content Include="Views\CariPanel\Chat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
